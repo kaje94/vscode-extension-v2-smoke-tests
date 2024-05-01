@@ -1,7 +1,0 @@
-version: '0.1'
-endpoints:
-  - name: bal-service
-    context: /
-    type: REST
-    port: 9090
-    networkVisibility: Public
