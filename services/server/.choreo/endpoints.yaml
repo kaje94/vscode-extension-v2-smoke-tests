@@ -1,0 +1,7 @@
+version: '0.1'
+endpoints:
+  - name: adsadsad
+    context: /
+    type: REST
+    port: 8080
+    networkVisibility: Public
