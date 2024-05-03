@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/mi" name="choreomi" xmlns="http://ws.apache.org/ns/synapse">
+	<resource methods="POST" uri-template="/resource">
+		<inSequence>
+			<log level="full" />
+		</inSequence>
+		<faultSequence>
+		</faultSequence>
+	</resource>
+</api>
