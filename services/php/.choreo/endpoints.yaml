@@ -1,7 +1,8 @@
-version: '0.1'
+version: "0.1"
 endpoints:
   - name: php-api
     context: /
     type: REST
     port: 8000
     networkVisibility: Public
+    schemaFilePath: openapi.yaml
