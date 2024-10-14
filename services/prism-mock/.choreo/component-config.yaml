@@ -3,8 +3,8 @@ kind: ComponentConfig
 spec:
   inbound:
     - name: Pet Store
-      port: 9090
-      type: REST
       networkVisibility: Public
       context: /
+      port: 9090
       schemaFilePath: specs/petstore_openapi.yaml
+      type: REST
