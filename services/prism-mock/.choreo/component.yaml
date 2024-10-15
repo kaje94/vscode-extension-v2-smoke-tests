@@ -1,9 +1,0 @@
-schemaVersion: 1.1
-endpoints:
-  - name: Pet Store
-    service:
-      port: 9090
-      basePath: /
-    type: REST
-    displayName: Pet Store
-    schemaFilePath: specs/petstore_openapi.yaml
