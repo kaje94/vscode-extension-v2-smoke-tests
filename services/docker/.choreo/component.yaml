@@ -1,0 +1,11 @@
+schemaVersion: 1.1
+endpoints:
+  - name: user-store
+    service:
+      port: 8080
+      basePath: /api/v1
+    type: REST
+    displayName: User Store
+    networkVisibilities:
+      - Public
+    schemaFilePath: openapi.yaml
