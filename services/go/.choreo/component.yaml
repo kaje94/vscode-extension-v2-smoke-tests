@@ -1,0 +1,13 @@
+schemaVersion: 1.1
+endpoints:
+  - name: go-greeter-svc-kaje
+    service:
+      port: 9090
+      basePath: /
+    type: REST
+    displayName: Go Greeter
+    networkVisibilities:
+      - Public
+      - Project
+      - Organization
+    schemaFilePath: openapi.yaml
