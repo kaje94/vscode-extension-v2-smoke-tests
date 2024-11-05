@@ -1,6 +1,6 @@
 schemaVersion: 1.1
 endpoints:
-  - name: go-greeter-svc-kaje
+  - name: go-greeter
     service:
       port: 9090
       basePath: /
@@ -8,6 +8,4 @@ endpoints:
     displayName: Go Greeter
     networkVisibilities:
       - Public
-      - Project
-      - Organization
     schemaFilePath: openapi.yaml
