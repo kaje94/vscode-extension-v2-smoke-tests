@@ -7,5 +7,7 @@ endpoints:
     type: REST
     displayName: Go Greeter
     networkVisibilities:
+      - Project
+      - Organization
       - Public
     schemaFilePath: openapi.yaml
