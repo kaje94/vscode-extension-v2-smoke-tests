@@ -1,0 +1,13 @@
+schemaVersion: 1.1
+endpoints:
+  - name: node-server
+    service:
+      port: 8080
+      basePath: /
+    type: REST
+    displayName: Node-server
+    networkVisibilities:
+      - Project
+      - Organization
+      - Public
+    schemaFilePath: openapi.yaml
