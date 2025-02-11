@@ -15,7 +15,7 @@ service / on new http:Listener(9090) {
         return "Hello, " + name;
     }
 
-     resource function get greeting1(string name) returns json|error {
+     resource function get greetingJson(string name) returns json|error {
         // Send a response back to the caller.
         if name is "" {
             return error("name should not be empty!");
