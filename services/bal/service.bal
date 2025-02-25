@@ -1,4 +1,5 @@
 import ballerina/http;
+import ballerina/log;
 
 # A service representing a network-accessible API
 # bound to port `9090`.
@@ -9,6 +10,7 @@ service / on new http:Listener(9090) {
     # + return - string name with hello message or error
     resource function get greeting(string name) returns string|error {
         // Send a response back to the caller.
+        log:printInfo("Received greeting for name: "+name);
         if name is "" {
             return error("name should not be empty!");
         }
@@ -17,6 +19,7 @@ service / on new http:Listener(9090) {
 
      resource function get greetingJson(string name) returns json|error {
         // Send a response back to the caller.
+        log:printInfo("Received greeting for name: "+name);
         if name is "" {
             return error("name should not be empty!");
         }
