@@ -1,0 +1,12 @@
+schemaVersion: 1.2
+endpoints:
+  - name: go-svc-endpoint
+    service:
+      port: 9090
+      basePath: /
+    type: REST
+    networkVisibilities:
+      - Project
+      - Organization
+      - Public
+    schemaFilePath: openapi.yaml
