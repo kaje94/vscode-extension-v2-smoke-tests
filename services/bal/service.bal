@@ -10,21 +10,21 @@ service / on new http:Listener(9090) {
     # + return - string name with hello message or error
     resource function get greeting(string name) returns string|error {
         // Send a response back to the caller.
-        log:printInfo("Received greeting for name: "+name);
+        log:printInfo("Received greeting for name: " + name);
         if name is "" {
-            return error("name should not be empty!");
+            return error("name should not be empty!!");
         }
         return "Hello, " + name;
     }
 
-     resource function get greetingJson(string name) returns json|error {
+    resource function get greetingJson(string name) returns json|error {
         // Send a response back to the caller.
-        log:printInfo("Received greeting for name: "+name);
+        log:printInfo("Received greeting for name: " + name);
         if name is "" {
             return error("name should not be empty!");
         }
         json jsonContent = {"name": name};
-        
+
         return jsonContent;
     }
 }
