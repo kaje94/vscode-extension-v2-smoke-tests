@@ -12,7 +12,7 @@ service / on new http:Listener(9090) {
         // Send a response back to the caller.
         log:printInfo("Received greeting for name: " + name);
         if name is "" {
-            return error("name should not be empty!!");
+            return error("name should not be empty!");
         }
         return "Hello, " + name;
     }
