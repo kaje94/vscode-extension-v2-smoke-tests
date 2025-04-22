@@ -11,3 +11,7 @@ endpoints:
       - Organization
       - Public
     schemaFilePath: openapi.yaml
+dependencies:
+  connectionReferences:
+    - name: bal-svc-public
+      resourceRef: service:/inae/bal-svc/v1/803f0/PUBLIC
