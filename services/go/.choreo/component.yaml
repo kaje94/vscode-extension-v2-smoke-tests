@@ -13,5 +13,5 @@ endpoints:
     schemaFilePath: openapi.yaml
 dependencies:
   connectionReferences:
-    - name: bal-svc-project-conn
-      resourceRef: service:/inae/bal-svc/v1/803f0/PUBLIC
+    - name: new-bal-svc-org-level-conn
+      resourceRef: service:/inae/bal-svc/v1/803f0/ORGANIZATION
