@@ -15,3 +15,5 @@ dependencies:
   connectionReferences:
     - name: new-bal-svc-org-level-conn
       resourceRef: service:/inae/bal-svc/v1/803f0/ORGANIZATION
+    - name: go-svc-mysql-conn1
+      resourceRef: database:AppointmentsDB/appointmentDB-dev
