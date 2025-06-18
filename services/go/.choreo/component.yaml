@@ -11,7 +11,3 @@ endpoints:
       - Organization
       - Public
     schemaFilePath: openapi.yaml
-dependencies:
-  connectionReferences:
-    - name: go-svc-mysql-conn1
-      resourceRef: database:AppointmentsDB/appointmentDB-dev
