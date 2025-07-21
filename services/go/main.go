@@ -19,15 +19,20 @@
 package main
 
 import (
+	"compress/gzip"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	"golang.org/x/oauth2/clientcredentials"
 )
 
 func main() {
@@ -35,7 +40,7 @@ func main() {
 	serverMux := http.NewServeMux()
 	serverMux.HandleFunc("/greeter/greet", greet)
 
-	serverPort := 9090
+	serverPort := 9091
 	server := http.Server{
 		Addr:    fmt.Sprintf(":%d", serverPort),
 		Handler: serverMux,
@@ -63,9 +68,77 @@ func main() {
 }
 
 func greet(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Calling greeter/greet")
 	name := r.URL.Query().Get("name")
 	if name == "" {
 		name = "Stranger"
 	}
-	fmt.Fprintf(w, "Hello, %s!\n", name)
+	// Read environment variables
+	consumerKey := os.Getenv("CHOREO_NEW_BAL_SVC_ORG_LEVEL_CONN_CONSUMERKEY")
+	consumerSecret := os.Getenv("CHOREO_NEW_BAL_SVC_ORG_LEVEL_CONN_CONSUMERSECRET")
+	serviceURL := os.Getenv("CHOREO_NEW_BAL_SVC_ORG_LEVEL_CONN_SERVICEURL")
+	tokenURL := os.Getenv("CHOREO_NEW_BAL_SVC_ORG_LEVEL_CONN_TOKENURL")
+	choreoApiKey := os.Getenv("CHOREO_NEW_BAL_SVC_ORG_LEVEL_CONN_APIKEY")
+
+	// Create OAuth2 client with client ID, client secret and token URL
+	var clientCredsConfig = clientcredentials.Config{
+		ClientID:     consumerKey,
+		ClientSecret: consumerSecret,
+		TokenURL:     tokenURL,
+	}
+	client := clientCredsConfig.Client(context.Background())
+
+	// Provide the correct resource path
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s/greetingJson?name=%s", serviceURL, name), nil)
+	if err != nil {
+		fmt.Println(err)
+		// Handle error
+	}
+
+	// Add the Choreo-API-Key header
+	req.Header.Add("Choreo-API-Key", choreoApiKey)
+	resp, err := client.Do(req)
+
+	// resp, err := http.Get(fmt.Sprintf("%sgreetingJson?name=%s", serviceurl, name))
+	fmt.Println(resp)
+	if err != nil {
+		fmt.Println("Failed to fetch bal-svc", err)
+	} else {
+		if resp.Header.Get("Content-Encoding") == "gzip" {
+			gzReader, err := gzip.NewReader(resp.Body)
+			if err != nil {
+				fmt.Println("Failed to parse unzip", err)
+			}
+			defer gzReader.Close()
+			body, err := io.ReadAll(gzReader)
+			if err != nil {
+				fmt.Println("Failed to read body", err)
+			}
+			type Response struct {
+				Name string `json:"name"`
+			}
+			var response Response
+			err = json.Unmarshal(body, &response)
+			if err != nil {
+				fmt.Println("Failed to unmarshal response", err)
+			}
+			fmt.Fprintf(w, "Hello, '%s'\n", response.Name)
+		} else {
+			body, err := io.ReadAll(resp.Body)
+			if err != nil {
+				fmt.Println("Failed to read body", err)
+			}
+			type Response struct {
+				Name string `json:"name"`
+			}
+			var response Response
+			err = json.Unmarshal(body, &response)
+			if err != nil {
+				fmt.Println("Failed to unmarshal response", err)
+			}
+			fmt.Fprintf(w, "Hello, %s\n", response.Name)
+		}
+	}
+	defer resp.Body.Close()
+	// fmt.Fprintf(w, "Hello, %s!\n", name)
 }
