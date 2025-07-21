@@ -1,8 +1,0 @@
-schemaVersion: 1.2
-endpoints:
-  - name: customer-api-golang1-endpoint
-    service:
-      port: 8080
-    type: REST
-    networkVisibilities:
-      - Public
