@@ -28,4 +28,13 @@ service / on new http:Listener(9090) {
 
         return jsonContent;
     }
+
+    resource function get user/profile() returns json|error {
+        // Send a response back to the caller.
+        log:printInfo("Calling user/profile");
+
+        json jsonContent = {"name": "Bob","email":"bob@gmail.com","id":"123"};
+
+        return jsonContent;
+    }
 }
