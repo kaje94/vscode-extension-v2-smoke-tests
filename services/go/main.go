@@ -39,6 +39,7 @@ func main() {
 
 	serverMux := http.NewServeMux()
 	serverMux.HandleFunc("/greeter/greet", greet)
+	serverMux.HandleFunc("/order", placeOrder)
 
 	serverPort := 9091
 	server := http.Server{
