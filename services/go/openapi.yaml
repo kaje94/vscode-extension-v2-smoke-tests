@@ -25,3 +25,18 @@ paths:
                 type: string
       deprecated: false
       security: []
+  /order:
+    get:
+      summary: Place an order
+      description: Place an order and get user profile information
+      tags:
+        - order
+      responses:
+        '200':
+          description: Successful response with user greeting
+          content:
+            text/plain:
+              schema:
+                type: string
+      deprecated: false
+      security: []

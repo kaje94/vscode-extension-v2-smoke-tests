@@ -100,13 +100,18 @@ func main() {
 	serverMux.HandleFunc("/greeter/greet", greet)
 	serverMux.HandleFunc("/order", placeOrder)
 
-	serverPort := 9091
+	// Use PORT environment variable if available, otherwise default to 9091
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "9091"
+	}
+	
 	server := http.Server{
-		Addr:    fmt.Sprintf(":%d", serverPort),
+		Addr:    fmt.Sprintf(":%s", port),
 		Handler: serverMux,
 	}
 	go func() {
-		log.Printf("Starting HTTP Greeter on port %d\n", serverPort)
+		log.Printf("Starting HTTP Greeter on port %s\n", port)
 		if err := server.ListenAndServe(); !errors.Is(err, http.ErrServerClosed) {
 			log.Fatalf("HTTP ListenAndServe error: %v", err)
 		}
