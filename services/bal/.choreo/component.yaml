@@ -1,0 +1,12 @@
+schemaVersion: 1.2
+endpoints:
+  - name: ballerina-greeter
+    service:
+      port: 9090
+      basePath: /
+    type: REST
+    displayName: Ballerina Greeter
+    networkVisibilities:
+      - Project
+      - Organization
+      - Public
