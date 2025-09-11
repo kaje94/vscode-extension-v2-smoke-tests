@@ -2,7 +2,7 @@ schemaVersion: 1.2
 endpoints:
   - name: go-greeter
     service:
-      port: 9090
+      port: 9091
       basePath: /
     type: REST
     displayName: Go Greeter

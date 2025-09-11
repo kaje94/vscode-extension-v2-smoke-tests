@@ -105,7 +105,7 @@ func main() {
 	if port == "" {
 		port = "9091"
 	}
-	
+
 	server := http.Server{
 		Addr:    fmt.Sprintf(":%s", port),
 		Handler: serverMux,
