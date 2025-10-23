@@ -94,11 +94,19 @@ func parseResponse(w http.ResponseWriter, resp *http.Response) (*Response, error
 	return &response, nil
 }
 
+func test(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Calling test endpoint")
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(map[string]bool{"success": true})
+}
+
 func main() {
 
 	serverMux := http.NewServeMux()
 	serverMux.HandleFunc("/greeter/greet", greet)
 	serverMux.HandleFunc("/order", placeOrder)
+	serverMux.HandleFunc("/test", test)
 
 	// Use PORT environment variable if available, otherwise default to 9091
 	port := os.Getenv("PORT")

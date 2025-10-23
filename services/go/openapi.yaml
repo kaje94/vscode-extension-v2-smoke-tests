@@ -40,3 +40,24 @@ paths:
                 type: string
       deprecated: false
       security: []
+  /test:
+    get:
+      summary: Test endpoint
+      description: Simple test endpoint that returns success status
+      tags:
+        - test
+      responses:
+        "200":
+          description: Successful test response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                required:
+                  - success
+      deprecated: false
+      security: []
